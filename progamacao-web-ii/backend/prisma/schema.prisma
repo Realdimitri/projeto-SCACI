@@ -1,0 +1,261 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model agenda_visita {
+  id_visita      Int                         @id @default(autoincrement()) @db.UnsignedInt
+  data_visita    DateTime                    @db.Date
+  horario_visita DateTime                    @db.Time(0)
+  status_visita  agenda_visita_status_visita
+  id_comprador   Int?                        @db.UnsignedInt
+  id_imovel      Int?                        @db.UnsignedInt
+  id_funcionario Int?                        @db.UnsignedInt
+  imovel         imovel?                     @relation(fields: [id_imovel], references: [id_imovel], onDelete: NoAction, onUpdate: NoAction, map: "FK_Agenda_Visita_2")
+  comprador      comprador?                  @relation(fields: [id_comprador], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Agenda_Visita_3")
+  funcionario    funcionario?                @relation(fields: [id_funcionario], references: [id_funcionario], onDelete: NoAction, onUpdate: NoAction, map: "FK_Agenda_Visita_4")
+
+  @@index([id_imovel], map: "FK_Agenda_Visita_2")
+  @@index([id_comprador], map: "FK_Agenda_Visita_3")
+  @@index([id_funcionario], map: "FK_Agenda_Visita_4")
+}
+
+model casa_ape {
+  valor_iptu_anual Decimal  @db.Decimal(6, 2)
+  data_ultimo_iptu DateTime @db.Date
+  valor_condominio Decimal? @db.Decimal(6, 2)
+  id_imovel        Int      @id @db.UnsignedInt
+  imovel           imovel   @relation(fields: [id_imovel], references: [id_imovel], onDelete: Cascade, onUpdate: NoAction, map: "FK_Casa_Ape_2")
+}
+
+model cliente {
+  id_cliente                 Int                  @id @default(autoincrement()) @db.UnsignedInt
+  nome                       String               @db.VarChar(100)
+  cpf_cnpj                   String               @unique(map: "cpf_cnpj") @db.VarChar(14)
+  data_nascimento            DateTime             @db.Date
+  telefone                   String               @db.VarChar(20)
+  email                      String?              @unique(map: "email") @db.VarChar(100)
+  url_comprovante_residencia String               @db.VarChar(255)
+  logradouro                 String               @db.VarChar(100)
+  numero                     String               @db.VarChar(10)
+  bairro                     String               @db.VarChar(100)
+  complemento                String?              @db.VarChar(50)
+  cidade                     String               @db.VarChar(100)
+  uf                         String               @db.Char(2)
+  cep                        String               @db.Char(8)
+  estado_civil               cliente_estado_civil
+  tipo_cliente               cliente_tipo_cliente
+  comprador                  comprador?
+  conjuge                    conjuge[]
+  proprietario               proprietario?
+}
+
+model comprador {
+  renda_mensal          Decimal                   @db.Decimal(15, 2)
+  profissao             String?                   @db.VarChar(50)
+  forma_pagamento       comprador_forma_pagamento
+  tipo_imovel_desejado  String?                   @db.VarChar(50)
+  faixa_valor_min       Decimal?                  @db.Decimal(10, 2)
+  faixa_valor_max       Decimal?                  @db.Decimal(10, 2)
+  prazo_compra          DateTime?                 @db.Date
+  descricao_desejada    String?                   @db.VarChar(255)
+  area_minima_desejada  Decimal?                  @db.Decimal(9, 2)
+  localizacao_desejada  String?                   @db.VarChar(100)
+  url_comprovante_renda String                    @db.VarChar(255)
+  id_cliente            Int                       @id @db.UnsignedInt
+  agenda_visita         agenda_visita[]
+  cliente               cliente                   @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Comprador_2")
+  venda                 venda[]
+}
+
+model conjuge {
+  cpf                   String    @db.VarChar(11)
+  nome                  String    @db.VarChar(100)
+  regime_bens           String    @db.VarChar(50)
+  data_nascimento       DateTime? @db.Date
+  url_comprovante_uniao String    @db.VarChar(255)
+  id_cliente            Int       @db.UnsignedInt
+  cliente               cliente   @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Conjuge_1")
+
+  @@id([id_cliente, cpf])
+}
+
+model corretor {
+  id_corretor     Int              @id @default(autoincrement()) @db.UnsignedInt
+  tipo            corretor_tipo
+  creci_corretor  String           @unique(map: "creci_corretor") @db.VarChar(15)
+  nome            String           @db.VarChar(100)
+  cpf_cnpj        String           @unique(map: "cpf_cnpj") @db.VarChar(14)
+  data_nascimento DateTime?        @db.Date
+  telefone        String           @db.VarChar(20)
+  email           String           @unique(map: "email") @db.VarChar(200)
+  logradouro      String?          @db.VarChar(100)
+  numero          String?          @db.VarChar(10)
+  bairro          String?          @db.VarChar(100)
+  complemento     String?          @db.VarChar(50)
+  cidade          String?          @db.VarChar(100)
+  uf              String?          @db.Char(2)
+  cep             String?          @db.Char(8)
+  corretor_venda  corretor_venda[]
+}
+
+model corretor_venda {
+  id_corretor       Int      @db.UnsignedInt
+  id_venda          Int      @db.UnsignedInt
+  comissao_corretor Decimal  @db.Decimal(8, 2)
+  corretor          corretor @relation(fields: [id_corretor], references: [id_corretor], onDelete: NoAction, onUpdate: NoAction, map: "FK_Corretor_Venda_2")
+  venda             venda    @relation(fields: [id_venda], references: [id_venda], onDelete: NoAction, onUpdate: NoAction, map: "FK_Corretor_Venda_3")
+
+  @@id([id_corretor, id_venda])
+  @@index([id_venda], map: "FK_Corretor_Venda_3")
+}
+
+model funcionario {
+  id_funcionario Int             @id @default(autoincrement()) @db.UnsignedInt
+  nome           String          @db.VarChar(100)
+  cpf            String          @unique(map: "cpf") @db.VarChar(11)
+  salario        Decimal         @db.Decimal(7, 2)
+  funcao         String?         @db.VarChar(50)
+  email          String          @unique(map: "email") @db.VarChar(200)
+  telefone       String          @db.VarChar(20)
+  agenda_visita  agenda_visita[]
+  venda          venda[]
+}
+
+model imovel {
+  id_imovel              Int                @id @default(autoincrement()) @db.UnsignedInt
+  matricula_imovel       String             @unique(map: "matricula_imovel") @db.VarChar(30)
+  situacao_legal         String             @db.VarChar(50)
+  url_comprovante_posse  String             @db.VarChar(255)
+  url_certidao_matricula String             @db.VarChar(255)
+  data_disponibilidade   DateTime?          @db.Date
+  valor_venda            Decimal            @db.Decimal(10, 2)
+  valor_minimo_venda     Decimal?           @db.Decimal(10, 2)
+  observacao             String?            @db.VarChar(255)
+  area_total             Decimal?           @db.Decimal(9, 2)
+  descricao_imovel       String?            @db.VarChar(255)
+  cotacao_imovel         Decimal?           @db.Decimal(10, 2)
+  inscricao_iptu         String             @db.VarChar(20)
+  logradouro             String             @db.VarChar(100)
+  numero                 String             @db.VarChar(10)
+  bairro                 String             @db.VarChar(100)
+  complemento            String?            @db.VarChar(50)
+  cidade                 String             @db.VarChar(100)
+  uf                     String             @db.Char(2)
+  cep                    String             @db.Char(8)
+  tipo_imovel            imovel_tipo_imovel
+  id_proprietario        Int?               @db.UnsignedInt
+  agenda_visita          agenda_visita[]
+  casa_ape               casa_ape?
+  proprietario           proprietario?      @relation(fields: [id_proprietario], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Imovel_2")
+  terreno                terreno?
+  venda                  venda[]
+
+  @@index([id_proprietario], map: "FK_Imovel_2")
+}
+
+model proprietario {
+  prazo_venda DateTime? @db.Date
+  observacao  String?   @db.VarChar(255)
+  id_cliente  Int       @id @db.UnsignedInt
+  imovel      imovel[]
+  cliente     cliente   @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Proprietario_2")
+  venda       venda[]
+}
+
+model terreno {
+  zona         terreno_zona
+  tipo_terreno terreno_tipo_terreno
+  id_imovel    Int                  @id @db.UnsignedInt
+  imovel       imovel               @relation(fields: [id_imovel], references: [id_imovel], onDelete: Cascade, onUpdate: NoAction, map: "FK_Terreno_2")
+}
+
+model venda {
+  id_venda                 Int                    @id @default(autoincrement()) @db.UnsignedInt
+  comissao_venda           Decimal?               @db.Decimal(8, 2)
+  data_proposta            DateTime?              @db.Date
+  valor_final              Decimal?               @db.Decimal(10, 2)
+  forma_pagamento          venda_forma_pagamento?
+  url_contrato             String?                @db.VarChar(255)
+  data_escritura           DateTime?              @db.Date
+  data_entrega_chave       DateTime?              @db.Date
+  livro_folha_cartorio     String?                @db.VarChar(20)
+  status_venda             venda_status_venda?
+  valor_entrada            Decimal?               @db.Decimal(8, 2)
+  saldo_devedor            Decimal?               @db.Decimal(10, 2)
+  observacoes              String?                @db.VarChar(255)
+  data_assinatura_contrato DateTime?              @db.Date
+  id_comprador             Int?                   @db.UnsignedInt
+  id_proprietario          Int?                   @db.UnsignedInt
+  id_imovel                Int?                   @db.UnsignedInt
+  id_funcionario           Int?                   @db.UnsignedInt
+  corretor_venda           corretor_venda[]
+  comprador                comprador?             @relation(fields: [id_comprador], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Venda_2")
+  proprietario             proprietario?          @relation(fields: [id_proprietario], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Venda_3")
+  imovel                   imovel?                @relation(fields: [id_imovel], references: [id_imovel], onDelete: NoAction, onUpdate: NoAction, map: "FK_Venda_4")
+  funcionario              funcionario?           @relation(fields: [id_funcionario], references: [id_funcionario], onDelete: NoAction, onUpdate: NoAction, map: "FK_Venda_5")
+
+  @@index([id_comprador], map: "FK_Venda_2")
+  @@index([id_proprietario], map: "FK_Venda_3")
+  @@index([id_imovel], map: "FK_Venda_4")
+  @@index([id_funcionario], map: "FK_Venda_5")
+}
+
+enum terreno_zona {
+  rural
+  urbana
+}
+
+enum corretor_tipo {
+  interno
+  externo
+}
+
+enum terreno_tipo_terreno {
+  rural
+  loteamento
+}
+
+enum comprador_forma_pagamento {
+  prazo
+  a_vista
+}
+
+enum agenda_visita_status_visita {
+  agendada
+  realizada
+  cancelada
+  reagendada
+}
+
+enum venda_forma_pagamento {
+  prazo
+  a_vista
+}
+
+enum venda_status_venda {
+  andamento
+  concluida
+  cancelada
+}
+
+enum cliente_estado_civil {
+  solteiro
+  casado
+  divorciado
+  viuvo
+}
+
+enum cliente_tipo_cliente {
+  comprador
+  proprietario
+}
+
+enum imovel_tipo_imovel {
+  terreno
+  casa_ape
+}
