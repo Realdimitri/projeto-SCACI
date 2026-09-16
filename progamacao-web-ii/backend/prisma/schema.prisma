@@ -48,7 +48,6 @@ model cliente {
   uf                         String               @db.Char(2)
   cep                        String               @db.Char(8)
   estado_civil               cliente_estado_civil
-  tipo_cliente               cliente_tipo_cliente
   comprador                  comprador?
   conjuge                    conjuge[]
   proprietario               proprietario?
@@ -73,13 +72,16 @@ model comprador {
 }
 
 model conjuge {
-  cpf                   String    @db.VarChar(11)
-  nome                  String    @db.VarChar(100)
-  regime_bens           String    @db.VarChar(50)
-  data_nascimento       DateTime? @db.Date
-  url_comprovante_uniao String    @db.VarChar(255)
-  id_cliente            Int       @db.UnsignedInt
-  cliente               cliente   @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Conjuge_1")
+  cpf                   String                   @db.VarChar(11)
+  nome                  String                   @db.VarChar(100)
+  regime_bens           String                   @db.VarChar(50)
+  data_nascimento       DateTime?                @db.Date
+  url_comprovante_uniao String                   @db.VarChar(255)
+  data_casamento        DateTime                 @db.Date
+  casamento_ativo       conjuge_casamento_ativo?
+  data_casamento_fim    DateTime?                @db.Date
+  id_cliente            Int                      @db.UnsignedInt
+  cliente               cliente                  @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Conjuge_1")
 
   @@id([id_cliente, cpf])
 }
@@ -250,12 +252,12 @@ enum cliente_estado_civil {
   viuvo
 }
 
-enum cliente_tipo_cliente {
-  comprador
-  proprietario
-}
-
 enum imovel_tipo_imovel {
   terreno
   casa_ape
+}
+
+enum conjuge_casamento_ativo {
+  sim
+  nao
 }
