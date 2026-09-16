@@ -16,8 +16,7 @@ CREATE TABLE Cliente (
     cidade VARCHAR(100) NOT NULL,
     uf CHAR(2) NOT NULL,
     cep CHAR(8) NOT NULL,
-    estado_civil ENUM('solteiro', 'casado', 'divorciado', 'viuvo') NOT NULL,
-    tipo_cliente ENUM('comprador', 'proprietario') NOT NULL
+    estado_civil ENUM('solteiro', 'casado', 'divorciado', 'viuvo') NOT NULL
 );
 
 
@@ -132,6 +131,9 @@ CREATE TABLE Conjuge (
     regime_bens VARCHAR(50) NOT NULL,
     data_nascimento DATE,
     url_comprovante_uniao VARCHAR(255) NOT NULL,
+    data_casamento DATE NOT NULL,
+    casamento_ativo ENUM('sim', 'nao'),
+    data_casamento_fim DATE,
     id_cliente INTEGER UNSIGNED,
     PRIMARY KEY (id_cliente, cpf)
 );
