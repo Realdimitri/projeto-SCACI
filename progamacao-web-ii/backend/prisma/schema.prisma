@@ -51,6 +51,7 @@ model cliente {
   comprador                  comprador?
   conjuge                    conjuge[]
   proprietario               proprietario?
+  @@map("Cliente")
 }
 
 model comprador {

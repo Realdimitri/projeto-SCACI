@@ -1,0 +1,24 @@
+### Teste 1: Atualizar cliente (Sucesso)
+PUT http://localhost:3000/clientes/1
+Content-Type: application/json
+
+{
+  "nome": "Pedro Xavier",
+  "telefone": "77999999999"
+}
+
+### Teste 2: Enviar campo apenas com espaços (Erro 400)
+PUT http://localhost:3000/clientes/1
+Content-Type: application/json
+
+{
+  "nome": "   "
+}
+
+### Teste 3: Enviar ID não numérico (Erro 400)
+PUT http://localhost:3000/clientes/abc
+Content-Type: application/json
+
+{
+  "nome": "Pedro"
+}

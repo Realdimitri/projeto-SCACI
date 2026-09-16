@@ -93,3 +93,49 @@ async function cadastrarCliente(req, res) {
         });
     }
 }
+/**
+ * @author Pedro Lucas Dos Santos Xavier
+ * Valida os dados recebidos para a edição de um cliente. Garantindo que a requisição não esteja vazia e que nenhum campo venha em branco ou nulo.
+ * @param {Object} dados - Objeto contendo os campos do cliente a serem atualizados (req.body).
+ * @returns {string|null} Retorna uma mensagem de erro em texto caso haja problema, ou null se estiver válido.
+ */
+function verificarDadosEdicaoCliente(dados){
+    if(!dados|| Object.keys(dados).length === 0){
+        return "Forneça pelo menos um campo para atualizar"
+    }else{
+        for(const[campo,valor]of Object.entries(dados)){
+            if(valor=== null|| valor=== undefined||(typeof valor ==='string' && valor.trim()==='')){
+                return `o campo ${campo} não pode ser vazio`
+            }
+        }
+    }
+    return null
+}
+/**
+ * @author Pedro Lucas Dos Santos Xavier 
+ * Atualiza os dados de um cliente existente.
+ * @param {Object} req - Objeto de requisição do Express (contém params e body).
+ * @param {Object} res - Objeto de resposta do Express.
+ * @returns {Object} Retorna o cliente atualizado ou uma mensagem de erro.
+ */
+async function editarCliente(req,res){
+const{id}=req.params;
+const dadosAtuais= req.body;
+if (isNaN(Number(id))) {
+        return res.status(400).json({ mensagem: "O ID fornecido deve ser um número válido." });
+    }
+const erro=verificarDadosEdicaoCliente(dadosAtuais);
+if(erro){
+    return res.status(400).json({mensagem: erro});
+}
+try{
+    const clienteAtualizado= await prisma.cliente.update({
+        where: {id_cliente: Number(id)},
+        data: dadosAtuais
+    });
+    return res.status(200).json(clienteAtualizado);
+}catch (error) {
+    return res.status(500).json({ erro: 'Erro ao atualizar no banco', detalhes: error.message });
+  }
+}
+export { cadastrarCliente, editarCliente }
