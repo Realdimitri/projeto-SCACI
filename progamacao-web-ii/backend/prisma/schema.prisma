@@ -79,7 +79,7 @@ model conjuge {
   url_comprovante_uniao String                   @db.VarChar(255)
   data_casamento        DateTime                 @db.Date
   casamento_ativo       conjuge_casamento_ativo?
-  data_casamento_fim    DateTime?                @db.Date
+  data_fim_casamento    DateTime?                @db.Date
   id_cliente            Int                      @db.UnsignedInt
   cliente               cliente                  @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction, map: "FK_Conjuge_1")
 
