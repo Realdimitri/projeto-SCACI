@@ -1,7 +1,37 @@
 import prisma from "../database.js";
 
+//Verifica se os campos obrigatórios (NOT NULL) do cliente foram preenchidos
+function verificarDadosCliente(dados) {
+    const obrigatorios = [
+        "nome",
+        "cpf_cnpj",
+        "data_nascimento",
+        "telefone",
+        "url_comprovante_residencia",
+        "logradouro",
+        "numero",
+        "bairro",
+        "cidade",
+        "uf",
+        "cep",
+        "estado_civil"
+    ];
+     let faltando = [];
+
+    for (const obrigatorio of obrigatorios) {
+        let dado = dados[obrigatorio];
+
+        if (dado === null || dado === "") {
+            faltando.push(obrigatorio);
+        }
+    }
+
+    return faltando;
+}
+
 async function cadastrarCliente(req, res) {
     const dados = req.body;
+    verificarDadosCliente(dados);
 
     let conjuge_cpf;
     let conjuge_nome;
