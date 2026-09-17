@@ -5,7 +5,7 @@ import prisma from "../database.js";
  * 
  * Verifica se os campos obrigatórios (NOT NULL) do cliente foram devidamente preenchidos.
  * 
- * @param {Object} dados - Objeto contendo os campos do cliente a serem inseridos (req.body).
+ * @param {Object} dados - Objeto contendo os dados do cliente a serem verificados.
  * @param {boolean} casado - boolean que verifica se cliente é casado (true) ou não (false).
  * @returns {Array} faltando - array contendo os nomes dos campos obrigatórios que não foram preenchidos.
  */
@@ -116,20 +116,7 @@ async function cadastrarCliente(req, res) {
             const id_cliente = cliente.id_cliente;
 
             if (casado) {
-
-                await prisma.conjuge.create({
-                    data: {
-                        cpf: dados.conjuge_cpf,
-                        nome: dados.conjuge_nome,
-                        regime_bens: dados.regime_bens,
-                        data_nascimento: dados.conjuge_data_nascimento,
-                        url_comprovante_uniao: dados.url_comprovante_uniao,
-                        data_casamento: dados.data_casamento,
-                        casamento_ativo: dados.casamento_ativo,
-                        data_fim_casamento: dados.data_fim_casamento,
-                        id_cliente
-                    }
-                });
+                await cadastrarConjuge(dados, id_cliente);
             }
 
             return res.status(200).json({cliente});
@@ -141,6 +128,31 @@ async function cadastrarCliente(req, res) {
     } else {
         return res.status(400).json({erro: `Preencha todos os campos obrigatórios! (${faltando.join(", ")})`});
     }
+}
+
+/**
+ * @author Matheus Pereira Rodrigues
+ * 
+ * Cadastra um cônjuge no banco de dados. 
+ *  
+ * @param {Object} dados - Objeto contendo os dados do cônjuge a serem inseridos. 
+ * @param {number} id_cliente -  ID do cliente ao qual o cônjuge está vinculado.
+ */
+async function cadastrarConjuge(dados, id_cliente) {
+
+    await prisma.conjuge.create({
+        data: {
+            cpf: dados.conjuge_cpf,
+            nome: dados.conjuge_nome,
+            regime_bens: dados.regime_bens,
+            data_nascimento: dados.conjuge_data_nascimento,
+            url_comprovante_uniao: dados.url_comprovante_uniao,
+            data_casamento: dados.data_casamento,
+            casamento_ativo: dados.casamento_ativo,
+            data_fim_casamento: dados.data_fim_casamento,
+            id_cliente: id_cliente
+         }
+    });
 }
 
 /**
