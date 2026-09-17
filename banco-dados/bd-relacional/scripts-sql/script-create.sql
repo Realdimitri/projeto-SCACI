@@ -115,6 +115,7 @@ CREATE TABLE Proprietario (
     id_cliente INTEGER UNSIGNED PRIMARY KEY
 );
 
+
 CREATE TABLE Agenda_Visita (
     id_visita INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     data_visita DATE NOT NULL,

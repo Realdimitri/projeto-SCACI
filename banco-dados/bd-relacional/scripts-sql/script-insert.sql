@@ -75,7 +75,7 @@ INSERT INTO Proprietario (id_cliente, prazo_venda, observacao) VALUES
 -- ====================================================================
 -- 6. POVOAMENTO DA TABELA: Conjuge (4 cônjuges)
 -- ====================================================================
-INSERT INTO Conjuge (cpf, nome, regime_bens, data_nascimento, url_comprovante_uniao, data_casamento, casamento_ativo, data_casamento_fim, id_cliente) VALUES
+INSERT INTO Conjuge (cpf, nome, regime_bens, data_nascimento, url_comprovante_uniao, data_casamento, casamento_ativo, data_fim_casamento, id_cliente) VALUES
 ('99988877711', 'Marcos Silva', 'Comunhão Parcial', '1993-05-12', 'http://doc/uniao1.pdf', '2017-05-10', 'sim', NULL, 1),
 ('99988877722', 'Fernanda Santos', 'Comunhão Universal', '1994-07-22', 'http://doc/uniao2.pdf', '2015-10-01', 'nao', '2022-02-28', 2),
 ('99988877733', 'Maria Pereira', 'Comunhão Parcial', '1977-02-14', 'http://doc/uniao3.pdf', '2025-05-27', 'sim', NULL, 10),
