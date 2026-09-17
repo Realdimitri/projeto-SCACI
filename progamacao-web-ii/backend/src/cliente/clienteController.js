@@ -202,4 +202,32 @@ try{
   }
 }
 
-export { cadastrarCliente, editarCliente }
+
+/**
+ * @author Matheus Pereira Rodrigues
+ * 
+ * Exclui um cliente do banco de dados.
+ * 
+ * @param {Object} req - Objeto de requisição do Express (contém params).
+ * @param {Object} res - Objeto de resposta do Express.
+ * @returns {Object} Retorna mensagem de êxito ou uma mensagem de erro.
+ */
+async function excluirCliente(req, res) {
+    const id = Number(req.params.id_cliente);
+
+    try {
+        await prisma.cliente.delete({
+            where: {
+                id_cliente: id
+            }
+        });
+
+        return res.status(200).json({mensagem: 'Cliente excluído com sucesso!'});
+
+    } catch (error) {
+        return res.status(400).json({erro: 'Erro ao excluir o cliente!'});
+    }
+
+}
+
+export { cadastrarCliente, editarCliente, excluirClient };
