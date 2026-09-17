@@ -132,7 +132,7 @@ CREATE TABLE Conjuge (
     data_nascimento DATE,
     url_comprovante_uniao VARCHAR(255) NOT NULL,
     data_casamento DATE NOT NULL,
-    casamento_ativo ENUM('sim', 'nao'),
+    casamento_ativo ENUM('sim', 'nao') NOT NULL,
     data_fim_casamento DATE,
     id_cliente INTEGER UNSIGNED,
     PRIMARY KEY (id_cliente, cpf)
