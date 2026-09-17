@@ -4,10 +4,10 @@ USE scaci;
 CREATE TABLE Cliente (
     id_cliente INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    cpf_cnpj VARCHAR(14) NOT NULL,
+    cpf_cnpj VARCHAR(14) NOT NULL UNIQUE,
     data_nascimento DATE NOT NULL,
     telefone VARCHAR(20) NOT NULL,
-    email VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
     url_comprovante_residencia VARCHAR(255) NOT NULL,
     logradouro VARCHAR(100) NOT NULL,
     numero VARCHAR(10) NOT NULL,
@@ -16,20 +16,18 @@ CREATE TABLE Cliente (
     cidade VARCHAR(100) NOT NULL,
     uf CHAR(2) NOT NULL,
     cep CHAR(8) NOT NULL,
-    estado_civil ENUM('solteiro', 'casado', 'divorciado', 'viuvo') NOT NULL,
-    tipo_cliente ENUM('comprador', 'proprietario') NOT NULL,
-    UNIQUE (cpf_cnpj, email)
+    estado_civil ENUM('solteiro', 'casado', 'divorciado', 'viuvo') NOT NULL
 );
+
 
 CREATE TABLE Funcionario (
     id_funcionario INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) NOT NULL,
+    cpf VARCHAR(11) NOT NULL UNIQUE,
     salario DECIMAL(7,2) UNSIGNED NOT NULL,
     funcao VARCHAR(50),
-    email VARCHAR(200) NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
-    UNIQUE (cpf, email)
+    email VARCHAR(200) NOT NULL UNIQUE,
+    telefone VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE Imovel (
@@ -81,20 +79,19 @@ CREATE TABLE Venda (
 CREATE TABLE Corretor (
     id_corretor INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     tipo ENUM('interno', 'externo') NOT NULL,
-    creci_corretor VARCHAR(15) NOT NULL,
+    creci_corretor VARCHAR(15) NOT NULL UNIQUE,
     nome VARCHAR(100) NOT NULL,
-    cpf_cnpj VARCHAR(14) NOT NULL,
+    cpf_cnpj VARCHAR(14) NOT NULL UNIQUE,
     data_nascimento DATE,
     telefone VARCHAR(20) NOT NULL,
-    email VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL UNIQUE,
     logradouro VARCHAR(100),
     numero VARCHAR(10),
     bairro VARCHAR(100),
     complemento VARCHAR(50),
     cidade VARCHAR(100),
     uf CHAR(2),
-    cep CHAR(8),
-    UNIQUE (cpf_cnpj, creci_corretor, email)
+    cep CHAR(8)
 );
 
 CREATE TABLE Comprador (
@@ -134,6 +131,9 @@ CREATE TABLE Conjuge (
     regime_bens VARCHAR(50) NOT NULL,
     data_nascimento DATE,
     url_comprovante_uniao VARCHAR(255) NOT NULL,
+    data_casamento DATE NOT NULL,
+    casamento_ativo ENUM('sim', 'nao'),
+    data_fim_casamento DATE,
     id_cliente INTEGER UNSIGNED,
     PRIMARY KEY (id_cliente, cpf)
 );

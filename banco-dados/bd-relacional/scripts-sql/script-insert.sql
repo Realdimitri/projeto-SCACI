@@ -17,28 +17,28 @@ INSERT INTO Corretor (id_corretor, tipo, creci_corretor, nome, cpf_cnpj, data_na
 -- ====================================================================
 -- 3. POVOAMENTO DA TABELA: Cliente (21 Clientes no total - Com 2 Neutros)
 -- ====================================================================
-INSERT INTO Cliente (id_cliente, nome, cpf_cnpj, data_nascimento, telefone, email, url_comprovante_residencia, logradouro, numero, bairro, complemento, cidade, uf, cep, estado_civil, tipo_cliente) VALUES
+INSERT INTO Cliente (id_cliente, nome, cpf_cnpj, data_nascimento, telefone, email, url_comprovante_residencia, logradouro, numero, bairro, complemento, cidade, uf, cep, estado_civil) VALUES
 -- Compradores (9)
-(1, 'Alice Silva', '12345678901', '1995-01-10', '11977770001', 'alice@email.com', 'http://doc/res1.pdf', 'Rua A', '1', 'Centro', NULL, 'São Paulo', 'SP', '01000000', 'casado', 'comprador'),
-(2, 'Bruno Santos', '23456789012', '1992-02-15', '11977770002', 'bruno@email.com', 'http://doc/res2.pdf', 'Rua B', '2', 'Centro', NULL, 'São Paulo', 'SP', '01000000', 'casado', 'comprador'),
-(3, 'Carla Diaz', '34567890123', '1989-03-20', '11977770003', 'carla@email.com', 'http://doc/res3.pdf', 'Rua C', '3', 'Jardins', NULL, 'São Paulo', 'SP', '01400000', 'solteiro', 'comprador'),
-(4, 'Diego Souza', '45678901234', '1994-04-25', '11977770004', 'diego@email.com', 'http://doc/res4.pdf', 'Rua D', '4', 'Jardins', NULL, 'São Paulo', 'SP', '01400000', 'solteiro', 'comprador'),
-(5, 'Eduarda Lima', '56789012345', '1991-05-30', '11977770005', 'eduarda@email.com', 'http://doc/res5.pdf', 'Rua E', '5', 'Lapa', NULL, 'São Paulo', 'SP', '05000000', 'divorciado', 'comprador'),
-(6, 'Fábio Melo', '67890123456', '1987-06-05', '11977770006', 'fabio@email.com', 'http://doc/res6.pdf', 'Rua F', '6', 'Lapa', NULL, 'São Paulo', 'SP', '05000000', 'viuvo', 'comprador'),
-(7, 'Gabriel Cruz', '78901234567', '1996-07-10', '11977770007', 'gabriel@email.com', 'http://doc/res7.pdf', 'Rua G', '7', 'Moema', NULL, 'São Paulo', 'SP', '04500000', 'solteiro', 'comprador'),
-(8, 'Amanda Rodrigues', '89012345678', '1993-08-15', '11977770008', 'amanda@email.com', 'http://doc/res8.pdf', 'Rua H', '8', 'Moema', NULL, 'São Paulo', 'SP', '04500000', 'solteiro', 'comprador'),
-(9, 'Igor Gomes', '90123456789', '1990-09-20', '11977770009', 'igor@email.com', 'http://doc/res9.pdf', 'Rua I', '9', 'Pinheiros', NULL, 'São Paulo', 'SP', '05400000', 'solteiro', 'comprador'),
+(1, 'Alice Silva', '12345678901', '1995-01-10', '11977770001', 'alice@email.com', 'http://doc/res1.pdf', 'Rua A', '1', 'Centro', NULL, 'São Paulo', 'SP', '01000000', 'casado'),
+(2, 'Bruno Santos', '23456789012', '1992-02-15', '11977770002', 'bruno@email.com', 'http://doc/res2.pdf', 'Rua B', '2', 'Centro', NULL, 'São Paulo', 'SP', '01000000', 'casado'),
+(3, 'Carla Diaz', '34567890123', '1989-03-20', '11977770003', 'carla@email.com', 'http://doc/res3.pdf', 'Rua C', '3', 'Jardins', NULL, 'São Paulo', 'SP', '01400000', 'solteiro'),
+(4, 'Diego Souza', '45678901234', '1994-04-25', '11977770004', 'diego@email.com', 'http://doc/res4.pdf', 'Rua D', '4', 'Jardins', NULL, 'São Paulo', 'SP', '01400000', 'solteiro'),
+(5, 'Eduarda Lima', '56789012345', '1991-05-30', '11977770005', 'eduarda@email.com', 'http://doc/res5.pdf', 'Rua E', '5', 'Lapa', NULL, 'São Paulo', 'SP', '05000000', 'divorciado'),
+(6, 'Fábio Melo', '67890123456', '1987-06-05', '11977770006', 'fabio@email.com', 'http://doc/res6.pdf', 'Rua F', '6', 'Lapa', NULL, 'São Paulo', 'SP', '05000000', 'viuvo'),
+(7, 'Gabriel Cruz', '78901234567', '1996-07-10', '11977770007', 'gabriel@email.com', 'http://doc/res7.pdf', 'Rua G', '7', 'Moema', NULL, 'São Paulo', 'SP', '04500000', 'solteiro'),
+(8, 'Amanda Rodrigues', '89012345678', '1993-08-15', '11977770008', 'amanda@email.com', 'http://doc/res8.pdf', 'Rua H', '8', 'Moema', NULL, 'São Paulo', 'SP', '04500000', 'solteiro'),
+(9, 'Igor Gomes', '90123456789', '1990-09-20', '11977770009', 'igor@email.com', 'http://doc/res9.pdf', 'Rua I', '9', 'Pinheiros', NULL, 'São Paulo', 'SP', '05400000', 'solteiro'),
 -- Proprietários (10)
-(10, 'João Pereira', '01234567890', '1975-10-25', '11988880010', 'joao@email.com', 'http://doc/res10.pdf', 'Av X', '10', 'Pinheiros', NULL, 'São Paulo', 'SP', '05400000', 'casado', 'proprietario'),
-(11, 'Kátia Oliveira', '12345678902', '1980-11-30', '11988880011', 'katia@email.com', 'http://doc/res11.pdf', 'Av Y', '11', 'Butantã', NULL, 'São Paulo', 'SP', '05500000', 'casado', 'proprietario'),
-(12, 'Lucas Martins', '23456789013', '1983-12-05', '11988880012', 'lucas@email.com', 'http://doc/res12.pdf', 'Av Z', '12', 'Butantã', NULL, 'São Paulo', 'SP', '05500000', 'solteiro', 'proprietario'),
-(13, 'Maria Fernanda', '34567890124', '1978-01-15', '11988880013', 'maria@email.com', 'http://doc/res13.pdf', 'Av W', '13', 'Santana', NULL, 'São Paulo', 'SP', '02000000', 'solteiro', 'proprietario'),
-(14, 'Nilson Reis', '45678901235', '1969-02-20', '11988880014', 'nilson@email.com', 'http://doc/res14.pdf', 'Av V', '14', 'Santana', NULL, 'São Paulo', 'SP', '02000000', 'divorciado', 'proprietario'),
-(15, 'Olívia Palmo', '56789012346', '1986-03-25', '11988880015', 'olivia@email.com', 'http://doc/res15.pdf', 'Av U', '15', 'Itaim', NULL, 'São Paulo', 'SP', '04500000', 'solteiro', 'proprietario'),
-(16, 'Pedro Alvares', '67890123457', '1972-04-30', '11988880016', 'pedro@email.com', 'http://doc/res16.pdf', 'Av T', '16', 'Itaim', NULL, 'São Paulo', 'SP', '04500000', 'viuvo', 'proprietario'),
-(17, 'Regina Duarte', '78901234568', '1965-05-05', '11988880017', 'regina@email.com', 'http://doc/res17.pdf', 'Av S', '17', 'Tatuapé', NULL, 'São Paulo', 'SP', '03300000', 'solteiro', 'proprietario'),
-(18, 'Sérgio Malandro', '89012345679', '1982-06-10', '11988880018', 'sergio@email.com', 'http://doc/res18.pdf', 'Av R', '18', 'Tatuapé', NULL, 'São Paulo', 'SP', '03300000', 'solteiro', 'proprietario'),
-(19, 'Tânia Mara', '90123456780', '1987-07-15', '11988880019', 'tania@email.com', 'http://doc/res19.pdf', 'Av Q', '19', 'Mooca', NULL, 'São Paulo', 'SP', '03100000', 'solteiro', 'proprietario');
+(10, 'João Pereira', '01234567890', '1975-10-25', '11988880010', 'joao@email.com', 'http://doc/res10.pdf', 'Av X', '10', 'Pinheiros', NULL, 'São Paulo', 'SP', '05400000', 'casado'),
+(11, 'Kátia Oliveira', '12345678902', '1980-11-30', '11988880011', 'katia@email.com', 'http://doc/res11.pdf', 'Av Y', '11', 'Butantã', NULL, 'São Paulo', 'SP', '05500000', 'casado'),
+(12, 'Lucas Martins', '23456789013', '1983-12-05', '11988880012', 'lucas@email.com', 'http://doc/res12.pdf', 'Av Z', '12', 'Butantã', NULL, 'São Paulo', 'SP', '05500000', 'solteiro'),
+(13, 'Maria Fernanda', '34567890124', '1978-01-15', '11988880013', 'maria@email.com', 'http://doc/res13.pdf', 'Av W', '13', 'Santana', NULL, 'São Paulo', 'SP', '02000000', 'solteiro'),
+(14, 'Nilson Reis', '45678901235', '1969-02-20', '11988880014', 'nilson@email.com', 'http://doc/res14.pdf', 'Av V', '14', 'Santana', NULL, 'São Paulo', 'SP', '02000000', 'divorciado'),
+(15, 'Olívia Palmo', '56789012346', '1986-03-25', '11988880015', 'olivia@email.com', 'http://doc/res15.pdf', 'Av U', '15', 'Itaim', NULL, 'São Paulo', 'SP', '04500000', 'solteiro'),
+(16, 'Pedro Alvares', '67890123457', '1972-04-30', '11988880016', 'pedro@email.com', 'http://doc/res16.pdf', 'Av T', '16', 'Itaim', NULL, 'São Paulo', 'SP', '04500000', 'viuvo'),
+(17, 'Regina Duarte', '78901234568', '1965-05-05', '11988880017', 'regina@email.com', 'http://doc/res17.pdf', 'Av S', '17', 'Tatuapé', NULL, 'São Paulo', 'SP', '03300000', 'solteiro'),
+(18, 'Sérgio Malandro', '89012345679', '1982-06-10', '11988880018', 'sergio@email.com', 'http://doc/res18.pdf', 'Av R', '18', 'Tatuapé', NULL, 'São Paulo', 'SP', '03300000', 'solteiro'),
+(19, 'Tânia Mara', '90123456780', '1987-07-15', '11988880019', 'tania@email.com', 'http://doc/res19.pdf', 'Av Q', '19', 'Mooca', NULL, 'São Paulo', 'SP', '03100000', 'solteiro');
 
 
 
@@ -75,11 +75,11 @@ INSERT INTO Proprietario (id_cliente, prazo_venda, observacao) VALUES
 -- ====================================================================
 -- 6. POVOAMENTO DA TABELA: Conjuge (4 cônjuges)
 -- ====================================================================
-INSERT INTO Conjuge (cpf, nome, regime_bens, data_nascimento, url_comprovante_uniao, id_cliente) VALUES
-('99988877711', 'Marcos Silva', 'Comunhão Parcial', '1993-05-12', 'http://doc/uniao1.pdf', 1),
-('99988877722', 'Fernanda Santos', 'Comunhão Universal', '1994-07-22', 'http://doc/uniao2.pdf', 2),
-('99988877733', 'Maria Pereira', 'Comunhão Parcial', '1977-02-14', 'http://doc/uniao3.pdf', 10),
-('99988877744', 'Ricardo Oliveira', 'Separação Total', '1979-11-05', 'http://doc/uniao4.pdf', 11);
+INSERT INTO Conjuge (cpf, nome, regime_bens, data_nascimento, url_comprovante_uniao, data_casamento, casamento_ativo, data_casamento_fim, id_cliente) VALUES
+('99988877711', 'Marcos Silva', 'Comunhão Parcial', '1993-05-12', 'http://doc/uniao1.pdf', '2017-05-10', 'sim', NULL, 1),
+('99988877722', 'Fernanda Santos', 'Comunhão Universal', '1994-07-22', 'http://doc/uniao2.pdf', '2015-10-01', 'nao', '2022-02-28', 2),
+('99988877733', 'Maria Pereira', 'Comunhão Parcial', '1977-02-14', 'http://doc/uniao3.pdf', '2025-05-27', 'sim', NULL, 10),
+('99988877744', 'Ricardo Oliveira', 'Separação Total', '1979-11-05', 'http://doc/uniao4.pdf', '2026-06-06', 'sim', NULL, 11);
 
 -- ====================================================================
 -- 7. POVOAMENTO DA TABELA: Imovel (12 Imóveis no total)
