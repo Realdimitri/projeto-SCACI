@@ -5,7 +5,7 @@ Implementação em HTML, CSS e JavaScript da página 6 de `analise-modelagem/pro
 Na raiz do repositório, execute:
 
 ```sh
-python3 -m http.server 8000 --directory programacao-web-ii/Front
+python3 -m http.server 8000 --directory progamacao-web-ii/Front
 ```
 
 Acesse `http://localhost:8000`.
