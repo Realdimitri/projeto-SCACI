@@ -41,7 +41,7 @@ function verificarDadosCliente(dados, casado) {
     for (const obrigatorio of obrigatorios) {
         const dado = dados[obrigatorio];
 
-        if (dado === null || dado === "") {
+        if (dado === null || dado === "" || dado === undefined) {
             faltando.push(obrigatorio);
         }
     }
@@ -230,4 +230,4 @@ async function excluirCliente(req, res) {
 
 }
 
-export { cadastrarCliente, editarCliente, excluirClient };
+export { cadastrarCliente, editarCliente, excluirCliente };
